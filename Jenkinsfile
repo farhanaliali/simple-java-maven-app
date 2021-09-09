@@ -7,6 +7,7 @@ pipeline {
     }
     
     environment {
+     dockerKill="sudo docker rm -f hellow"
      dockerRun="sudo docker run  --name 	hellow  hello-world"
    }
 
@@ -30,6 +31,7 @@ pipeline {
             steps {
               
              sshagent(['farhanali']) {
+                sh 'ssh -o StrictHostKeyChecking=no  farhanali@192.168.70.235 ${dockerKill}'
                 sh 'ssh -o StrictHostKeyChecking=no  farhanali@192.168.70.235 ${dockerRun}'
            }
            }
