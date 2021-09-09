@@ -5,9 +5,7 @@ pipeline {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "M3"
     }
-       script {
-            
-             }
+    
     environment {
      dockerRun="sudo docker run  --name 	hellow  hello-world"
    }
