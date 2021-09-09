@@ -23,11 +23,13 @@ pipeline {
             }
         }
         stage('run docker on remote ') {
+            steps {
+            
            def dockerRun = 'sudo docker run  --name 	hellow  hello-world'
             sshagent(['farhanali']) {
             sh 'ssh -o StrictHostKeyChecking=no  farhanali@192.168.70.235 $dockerRun '
            }
-          
+           }
         }     
         }
     }
