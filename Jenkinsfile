@@ -22,13 +22,12 @@ pipeline {
          sh' sudo docker build -t java-simple .'
             }
         }
-         stage('Build docker  run ') {
-            steps {
-                  sh 'sudo docker rm -f maven_docker '
-                  sh'sudo docker run  --name 	maven_docker  java-simple'
-            }
-        }
-
-           
+        stage('run docker on remote ') {
+           def dockerRun = 'sudo docker run  --name 	hellow  hello-world'
+            sshagent(['farhanali']) {
+            sh 'ssh -o StrictHostKeyChecking=no  farhanali@192.168.70.235 $dockerRun '
+           }
+          
+        }     
         }
     }
