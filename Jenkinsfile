@@ -7,8 +7,8 @@ pipeline {
     }
     
     environment {
-     dockerKill="sudo docker rm -f hellow"
-     dockerRun="sudo docker run  --name 	hellow  hello-world"
+     dockerKill="sudo docker rm -f simple-java"
+     dockerRun="sudo docker run  --name 	simple-java  farhanluckali/java-simple:lastest"
    }
 
     stages {
@@ -27,6 +27,23 @@ pipeline {
          sh' sudo docker build -t java-simple .'
             }
         }
+		
+		stage ('Push to Docker hub') {
+		
+			steps {
+			      withCredentials([usernamePassword(credentialsId: 'dockerhub-farhanali', passwordVariable: 'dockerhub-farhanaliPassword', usernameVariable: 'dockerhub-farhanaliUser')])
+				  
+				  {
+				  
+				  sh "docker login -u ${env.dockerhub-farhanaliUser} -p ${env.dockerhub-farhanaliPassword}"
+                  sh 'docker push farhanluckali/java-simple:lastest'
+				  
+				  }
+				  
+			}
+		
+		
+		}	
         stage('run docker on remote ') {
             steps {
               
