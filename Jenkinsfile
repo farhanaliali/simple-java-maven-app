@@ -31,11 +31,11 @@ pipeline {
 		stage ('Push to Docker hub') {
 		
 			steps {
-			      withCredentials([usernamePassword(credentialsId: 'dockerhub-farhanali', passwordVariable: 'dockerhub-farhanaliPassword', usernameVariable: 'dockerhub-farhanaliUser')])
+			      withCredentials([usernamePassword(credentialsId: 'dockerhub-farhanali', passwordVariable: 'dockerhub-pwd', usernameVariable: 'dockerhub-user')])  
 				  
 				  {
 				  
-				  sh "docker login -u ${env.dockerhub-farhanaliUser} -p ${env.dockerhub-farhanaliPassword}"
+				  sh "docker login -u ${dockerhub-pwd} -p ${dockerhub-user}"
                   sh 'docker push farhanluckali/java-simple:lastest'
 				  
 				  }
