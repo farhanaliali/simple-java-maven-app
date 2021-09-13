@@ -9,6 +9,12 @@ pipeline {
     environment {
      dockerKill="sudo docker rm -f simple-java"
      dockerRun="sudo docker run  --name 	simple-java  farhanluckali/java-simple:lastest"
+	 
+	 registry = "farhanluckali/java-simple" 
+     registryCredential = 'dockerhub-farhanali' 
+     dockerImage = '' 
+
+
    }
 
     stages {
@@ -31,15 +37,12 @@ pipeline {
 		stage ('Push to Docker hub') {
 		
 			steps {
-			      withCredentials([usernamePassword(credentialsId: 'dockerhub-farhanali', passwordVariable: 'dockerhub-pwd', usernameVariable: 'dockerhub-user')])  
-				  
-				  {
-				  
-				  sh "docker login -u ${dockerhub-user} -p ${dockerhub-pwd}"
-                  sh 'docker push farhanluckali/java-simple:lastest'
-				  
-				  }
-				  
+			     script {
+							docker.withRegistry('', registryCredential)   {
+							dockerImage.push()
+							}
+				 
+				 }
 			}
 		
 		
@@ -55,3 +58,4 @@ pipeline {
         }     
         }
     }
+
