@@ -50,12 +50,12 @@ pipeline {
 		
 		}
 
-          stage('remote docker on remote ') {
+          stage('remove docker on remote ') {
             steps {
               
              sshagent(['farhanali']) {
 
-                sh 'ssh -o StrictHostKeyChecking=no  farhanali@192.168.70.235 ${dockerRun}'
+                sh 'ssh -o StrictHostKeyChecking=no  farhanali@192.168.70.235 ${dockerKill}'
            }
            }
         }    
@@ -70,3 +70,6 @@ pipeline {
         }     
         }
     }
+
+
+
