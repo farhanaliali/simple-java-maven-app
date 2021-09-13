@@ -13,10 +13,7 @@ pipeline {
 	 registry = "farhanluckali/java-simple" 
      registryCredential = 'dockerhub-farhanali' 
      dockerImage = '' 
-
-
    }
-
     stages {
         stage('Build') {
             steps {
@@ -32,8 +29,7 @@ pipeline {
          sh 'pwd'   
          sh' sudo docker build -t java-simple .'
             }
-        }
-		
+        }	
 		stage ('Push to Docker hub') {
 		
 			steps {
@@ -43,9 +39,7 @@ pipeline {
 							}
 				 
 				 }
-			}
-		
-		
+			}	
 		}	
         stage('run docker on remote ') {
             steps {
