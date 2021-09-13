@@ -35,7 +35,7 @@ pipeline {
 				  
 				  {
 				  
-				  sh "docker login -u ${dockerhub-pwd} -p ${dockerhub-user}"
+				  sh "docker login -u ${dockerhub-user} -p ${dockerhub-pwd}"
                   sh 'docker push farhanluckali/java-simple:lastest'
 				  
 				  }
