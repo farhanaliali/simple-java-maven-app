@@ -13,7 +13,10 @@ pipeline {
 	 registry = "farhanluckali/java-simple" 
      registryCredential = 'dockerhub-farhanali' 
      dockerImage = '' 
+
+
    }
+
     stages {
         stage('Build') {
             steps {
@@ -24,12 +27,15 @@ pipeline {
                 sh "mvn -B -DskipTests clean package"
             }
         }
-        stage('Build docker image') {
-            steps {
-         sh 'pwd'   
-         sh' sudo docker build -t java-simple .'
-            }
-        }	
+        stage('Building our image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build registry  
+               }
+            } 
+
+        }
+		
 		stage ('Push to Docker hub') {
 		
 			steps {
@@ -39,7 +45,9 @@ pipeline {
 							}
 				 
 				 }
-			}	
+			}
+		
+		
 		}	
         stage('run docker on remote ') {
             steps {
@@ -52,4 +60,3 @@ pipeline {
         }     
         }
     }
-
