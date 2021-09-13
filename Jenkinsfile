@@ -8,7 +8,7 @@ pipeline {
     
     environment {
      dockerKill="sudo docker rm -f simple-java"
-     dockerRun="sudo docker run  --name 	simple-java  farhanluckali/java-simple:lastest"
+     dockerRun="sudo docker run  --name 	simple-java  farhanluckali/java-simple:latest"
 	 
 	 registry = "farhanluckali/java-simple" 
      registryCredential = 'dockerhub-farhanali' 
